@@ -12,7 +12,20 @@ class HomeComponent extends React.Component{
             },
             items : ItemController.getItems()
         }
-        console.log(this.state.items)
+
+        this.resetItems.bind(this)
+        this.resetInputs.bind(this)
+    }
+
+    resetItems(items){
+        this.setState({
+            items
+        })
+    }
+
+    resetInputs(){
+        document.querySelector('input[name="name"]').value = ''
+        document.querySelector('input[name="color"]').value = ''
     }
 
     handleChange(event){
@@ -24,48 +37,46 @@ class HomeComponent extends React.Component{
     }
 
     async handleAdd(){
-        if(this.state.item.name.length < 0 || this.state.item.color.length < 0 )
+        if(this.state.item.name.length < 1 || this.state.item.color.length < 1 )
             return
         let item = this.state.item
 
         item['isFavorite'] = false
-        let data = ''
-        await ItemController.newItem(item).then(result => {
-            data = result
+        await ItemController.newItem(item).then(results => {
+            this.resetItems(results)
+            this.resetInputs()
         })
-        this.setState({
-            items : data
-        })
+
     }
 
     async handleFave(event){
-        alert(event.target.data)
-        let data = ''
-        await ItemController.favoriteItem(event.target.name, event.target.data).then( results => {
-            data = results
+        // alert(JSON.stringify(data))
+        let {_id, isFavorite} = JSON.parse(event.target.getAttribute('data'))
+        console.log(_id, isFavorite)
+        // let data = ''
+        await ItemController.favoriteItem(_id, isFavorite).then( results => {
+            this.resetItems(results)
         })
 
-        this.setState({
-            items : data
-        })
     }
 
     async handleDelete(event){
-        alert(event.target.data)
-        let data = ''
-        await ItemController.deleteItem(event.target.data).then( results => {
-            data = results
+        // alert(data)
+        let _id = event.target.getAttribute('data')
+        console.log(_id)
+        // let data = ''
+        await ItemController.deleteItem(_id).then( results => {
+            this.resetItems(results)
+        }).catch(err => {
+            console.log(err)
         })
 
-        this.setState({
-            items : data
-        })
     }
 
     render(){
         return(
             <div>
-                <div>
+                <div style={{marginLeft: '20px'}}>
                     <label>Name: </label>
                     <input
                     type="text" 
@@ -80,9 +91,11 @@ class HomeComponent extends React.Component{
                     onChange={this.handleChange.bind(this)}/>
                     <button onClick={this.handleAdd.bind(this)}> Add Items </button>
                 </div>
-                <div>
-                    {this.state.items.forEach(item => (
+                <div style={{marginTop: '20px', marginLeft: '20px'}}>
+                    {this.state.items.map(item => (
                         <Item
+                        key={this.state.items.indexOf(item)}
+                        _id={item._id}
                         name={item.name}
                         color={item.color}
                         isFavorite={item.isFavorite}

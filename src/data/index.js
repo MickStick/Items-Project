@@ -1,18 +1,18 @@
 export default [
     {
-        id: 1,
+        _id: 'Pickles1',
         name: 'Pickles',
         color: 'Green',
         isFavorite: false
     },
     {
-        id: 2,
+        _id: 'Grape1',
         name: 'Grape',
         color: 'Purple',
         isFavorite: false
     },
     {
-        id: 3,
+        _id: 'DVD1',
         name: 'DVD',
         color: 'White',
         isFavorite: false
