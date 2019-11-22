@@ -11,3 +11,43 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.item .fave{
+  color: #d43c31;
+}
+
+.item .unfave{
+  color: white;
+  text-shadow: #000 0px 0px 1px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.item button{
+  outline: none;
+  border: none;
+  font-size: 20px;
+  margin: 0;
+  float: right;
+}
+
+.item tbody td:nth-child(2){
+  width: 60px;
+}
+
+.item .delete{
+  line-height: 5px;
+  font-size: 25px;
+}
+
+button{
+  cursor: pointer;
+}
+
+a{
+  color: black;
+  transition: fontWeight 250ms;
+}
+
+a:hover{
+  font-weight: 500;
+}

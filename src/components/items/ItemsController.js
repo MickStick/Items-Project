@@ -9,13 +9,15 @@ class ItemsController{
     static async newItem(item){
         if(window.localStorage['items']){
             let temp = JSON.parse(window.localStorage['items'])
-            let filtered = temp.items.filter(i => i.name === item.name || i._id.includes(item.name))
+            let filtered = temp.items.filter(i => i._id.includes(item.name))
             console.log(filtered.length)
-            item['_id'] = `${item.name}${filtered.length + 1}`
+            let id = filtered.length > 0 ? filtered[filtered.length - 1]._id.split(item.name)[1] : 0
+            console.log(id)
+            item['_id'] = `${item.name}${Number(id) + 1}`
             temp.items.push(item)
             window.localStorage['items'] = JSON.stringify(temp)
         }else{
-            let filtered = items.filter(i => i.name === item.name || i._id.includes(item.name))
+            let filtered = items.filter(i => i._id.includes(item.name))
             item['_id'] = `${item.name}${filtered.length + 1}`
             items.push(item)
             window.localStorage['items'] = JSON.stringify({items:items})

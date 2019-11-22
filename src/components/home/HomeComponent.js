@@ -83,13 +83,21 @@ class HomeComponent extends React.Component{
                     value={this.state.name}
                     name="name"
                     onChange={this.handleChange.bind(this)}/>
-                    <label>Color: </label>
+                    <label style={{marginLeft: '10px'}}>Color: </label>
                     <input
                     type="text" 
                     value={this.state.color}
                     name="color"
                     onChange={this.handleChange.bind(this)}/>
-                    <button onClick={this.handleAdd.bind(this)}> Add Items </button>
+                    <button style={{
+                        fontSize: '19px', 
+                        lineHeight: '15px',
+                        position: 'relative',
+                        top: '1px',
+                        left: '5px'
+
+                    }}
+                    onClick={this.handleAdd.bind(this)}> &#43; </button>
                 </div>
                 <div style={{marginTop: '20px', marginLeft: '20px'}}>
                     {this.state.items.map(item => (
