@@ -10,12 +10,22 @@ class FavoriteComponent extends React.Component{
         }
     }
 
+     /**
+     * 
+     * @param {Object} items 
+     * Updates the items state with given items Object
+     */
     resetItems(items){
         this.setState({
             items
         })
     }
 
+    /**
+     * 
+     * @param {Object} event 
+     * Calls favorite item method in item controller
+     */
     async handleFave(event){
         // alert(JSON.stringify(data))
         let {_id, isFavorite} = JSON.parse(event.target.getAttribute('data'))
@@ -27,6 +37,11 @@ class FavoriteComponent extends React.Component{
 
     }
 
+    /**
+     * 
+     * @param {Object} event 
+     * Calls delete item method in item controller
+     */
     async handleDelete(event){
         // alert(data)
         let _id = event.target.getAttribute('data')

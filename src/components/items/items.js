@@ -1,5 +1,12 @@
 import React from 'react'
 
+/**
+ * 
+ * @param {Object} props
+ * Item component containing item name, color, isFavorite,
+ * favorite button and delete button
+ * @return {Component} 
+ */
 const item = props => {
     // props = props;
     let {_id, name, color, isFavorite, Fave, Delete} = props;

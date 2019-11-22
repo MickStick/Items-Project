@@ -1,11 +1,24 @@
-import items from '../../data'
+import items from '../../model'
 
+/**
+ * Class for controlling item functionality
+ */
 class ItemsController{
 
+    /**
+     * Gets the saved items or static items from model
+     * @returns {Object}
+     */
     static getItems(){
         return (window.localStorage['items'] ? JSON.parse(window.localStorage['items']).items : items)
     }
 
+    /**
+     * 
+     * @param {Object} item 
+     * Adds new item to item array then saved in local storage
+     * @returns {Object}
+     */
     static async newItem(item){
         if(window.localStorage['items']){
             let temp = JSON.parse(window.localStorage['items'])
@@ -26,6 +39,14 @@ class ItemsController{
         return JSON.parse(window.localStorage['items']).items
     }
 
+    /**
+     * 
+     * @param {String} _id 
+     * @param {Boolean} fave 
+     * Finds the specified items, sets isFavorite to true/false then
+     * saves to local store
+     * @returns {Object}
+     */
     static async favoriteItem(_id, fave){
         if(window.localStorage['items']){
             let temp = JSON.parse(window.localStorage['items'])
@@ -48,6 +69,12 @@ class ItemsController{
         return JSON.parse(window.localStorage['items']).items
     }
 
+    /**
+     * 
+     * @param {String} _id 
+     * Deletes specified item from local storage
+     * @returns {Object}
+     */
     static async deleteItem(_id){
         try{
             if(window.localStorage['items']){

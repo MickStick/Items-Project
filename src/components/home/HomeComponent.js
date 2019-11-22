@@ -17,17 +17,30 @@ class HomeComponent extends React.Component{
         this.resetInputs.bind(this)
     }
 
+    /**
+     * 
+     * @param {Object} items 
+     * Updates the items state with given items Object
+     */
     resetItems(items){
         this.setState({
             items
         })
     }
 
+    /**
+     * Clears the name and color input fields
+     */
     resetInputs(){
         document.querySelector('input[name="name"]').value = ''
         document.querySelector('input[name="color"]').value = ''
     }
 
+    /**
+     * 
+     * @param {Object} event 
+     * Updates item state as the inputs' values changes
+     */
     handleChange(event){
         let item = this.state.item
         item[event.target.name] = event.target.value
@@ -36,6 +49,11 @@ class HomeComponent extends React.Component{
         })
     }
 
+    /**
+     * Set up a new item Object using values from name and color
+     * inputs (if not empty) then runs add item method from
+     * item controller
+     */
     async handleAdd(){
         if(this.state.item.name.length < 1 || this.state.item.color.length < 1 )
             return
@@ -49,6 +67,11 @@ class HomeComponent extends React.Component{
 
     }
 
+    /**
+     * 
+     * @param {Object} event 
+     * Calls favorite item method in item controller
+     */
     async handleFave(event){
         // alert(JSON.stringify(data))
         let {_id, isFavorite} = JSON.parse(event.target.getAttribute('data'))
@@ -60,6 +83,11 @@ class HomeComponent extends React.Component{
 
     }
 
+    /**
+     * 
+     * @param {Object} event 
+     * Calls delete item method in item controller
+     */
     async handleDelete(event){
         // alert(data)
         let _id = event.target.getAttribute('data')
